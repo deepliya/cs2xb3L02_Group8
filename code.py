@@ -1,17 +1,23 @@
 def are_valid_groups(student, groups):
 
-    for x in student:
+    for x in groups:
 
-        found = False
+        if len(x) != 2 and len(x) != 3:
 
-        for y in groups:
+            return False
 
-            if x in y:
+    for y in student:
 
-                found = True
+        counter = 0
 
-        if not found:
+        for x in groups:
 
-            return found
+            if y in x:
+
+                counter += 1
+
+        if counter != 1:
+
+            return False
 
     return True
