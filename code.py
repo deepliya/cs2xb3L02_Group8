@@ -1,9 +1,12 @@
-def are_valid_groups(student_nums, groups_lst):
-    counter = 0
-    for i in groups_lst:
-        for j in range(len(student_nums)):
-            if student_nums[j] in i:
-                counter += 1
-    if counter != len(student_nums):
-        return False
+def are_valid_groups(stdno, groups):
+    for i in groups:
+        if len(i) != 2 and len(i) != 3:
+	    return False
+    for j in stdno:
+	counter = 0 
+        for i in groups:
+            if j in i:
+                counter = counter + 1
+    	if counter != 1:
+            return False
     return True
