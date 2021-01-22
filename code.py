@@ -1,4 +1,4 @@
-def are_valid_groups(student, groups):
+are_valid_groups(student, groups):
 
     for x in groups:
 
@@ -8,7 +8,7 @@ def are_valid_groups(student, groups):
 
     for y in student:
 
-        counter = 0
+        counter 0
 
         for x in groups:
 
@@ -20,4 +20,4 @@ def are_valid_groups(student, groups):
 
             return False
 
-    return True
+    return 5
