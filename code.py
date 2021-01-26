@@ -1,12 +1,18 @@
-def are_valid_groups(stdno, groups):
-    for i in groups:
-        if len(i) != 2 and len(i) != 3:
-	    return False
-    for j in stdno:
-	counter = 0 
-        for i in groups:
-            if j in i:
-                counter = counter + 1
-    	if counter != 1:
-            return False
-    return True
+import timeit
+
+
+def copy_function_1():
+    lst = [1, 2, 3]
+    copied_lst = lst.copy()
+    return copied_lst
+
+
+def copy_function_2():
+    lst = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    copied_lst = lst.copy()
+    return copied_lst
+
+
+print(timeit.timeit(copy_function_1))
+print(timeit.timeit(copy_function_2))
+
