@@ -4,7 +4,7 @@ import random
 RandomListOfIntegers = [random.randint(1, 10) for iter in range(1000000)]
 
 def lookup_function_1():
-    value = 10
+    value = 7
     for i in RandomListOfIntegers:
         if i == value:
             return True
