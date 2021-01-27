@@ -1,18 +1,15 @@
 import timeit
+import random
 
 
-def copy_function_1():
-    lst = [1, 2, 3]
+def copy_function(lst):
     copied_lst = lst.copy()
     return copied_lst
 
 
-def copy_function_2():
-    lst = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    copied_lst = lst.copy()
-    return copied_lst
+for i in range(1, 1001, 50):
 
+    lst = [random.randint(1, 10) for iter in range(i)]
+    print(timeit.timeit('%s'%copy_function(lst)))
 
-print(timeit.timeit(copy_function_1))
-print(timeit.timeit(copy_function_2))
 
