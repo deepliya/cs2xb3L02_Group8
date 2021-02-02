@@ -35,7 +35,7 @@ def tri_pivot_quicksort(L):
     if len(L) < 2:
         return L
 
-    #put the pivots in ascending order
+    #put pivots in ascending order
     if L[0] <= L[-1] <= L[mid]:
         L[mid], L[-1] = L[-1], L[mid]
     elif L[mid] <= L[-1] <= L[0]:
@@ -52,18 +52,19 @@ def tri_pivot_quicksort(L):
     pivot3 = L[-1]
     left, left_center, right_center, right = [], [], [], []
 
-    for num in L[1:-1]:
-        if num == pivot2:
+    for i in range(1, len(L)-1):
+        if i == mid:
             continue
-        elif num <= pivot1:
-            left.append(num)
-        elif pivot1 < num <= pivot2:
-            left_center.append(num)
-        elif pivot2 < num <= pivot3:
-            right_center.append(num)
+        elif L[i] <= pivot1:
+            left.append(L[i])
+        elif pivot1 < L[i] <= pivot2:
+            left_center.append(L[i])
+        elif pivot2 < L[i] <= pivot3:
+            right_center.append(L[i])
         else:
-            right.append(num)
+            right.append(L[i])
     return tri_pivot_quicksort(left) + [pivot1] + tri_pivot_quicksort(left_center) + \
            [pivot2] + tri_pivot_quicksort(right_center) + [pivot3] + tri_pivot_quicksort(right)
+
 
 def quad_pivot_quicksort(lst):
