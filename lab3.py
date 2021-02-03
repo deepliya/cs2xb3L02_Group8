@@ -35,3 +35,4 @@ def create_near_sorted_list(n, factor):
         index2 = random.randint(0, n-1)
         L[index1], L[index2] = L[index2], L[index1]
     return L
+
