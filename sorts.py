@@ -11,12 +11,12 @@ def quicksort_inplace(L):
                 L[i],L[p] = L[p],L[i]
                 p+=1
         L[p],L[right]=L[right],L[p]
-        print(" ".join(str(x) for x in L))
         sort(L,left,p-1)
         sort(L,p+1,right)
     l = 0
     r = len(L)-1
     sort(L, l, r)
+    return (L)
 
 
 quicksort_inplace(sample)
