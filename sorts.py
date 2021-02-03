@@ -1,7 +1,22 @@
 import random
 
-def quicksort_inplace(lst):
-	#should take a list as input and sort it without creating copies or other temporary lists
+def quicksort_inplace(L):
+    def sort(L,left,right):
+        if right-left<1: 
+            return
+        pivot = L[right]
+        p = left
+        for i in range(left, right):
+            if L[i] < pivot:
+                L[i],L[p] = L[p],L[i]
+                p+=1
+        L[p],L[right]=L[right],L[p]
+        print(" ".join(str(x) for x in L))
+        sort(L,left,p-1)
+        sort(L,p+1,right)
+    l = 0
+    r = len(L)-1
+    sort(L, l, r)
 
 def our_quicksorts(L):
     copy = dual_pivot_quicksort(L)
