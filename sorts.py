@@ -1,34 +1,86 @@
-def quicksort_inplace(lst):
+import random
 
-    if len(lst) < 2:
-        return lst
+def quicksort_inplace(L):
+    def sort(L,left,right):
+        if right-left<1: 
+            return
+        pivot = L[right]
+        p = left
+        for i in range(left, right):
+            if L[i] < pivot:
+                L[i],L[p] = L[p],L[i]
+                p+=1
+        L[p],L[right]=L[right],L[p]
+        print(" ".join(str(x) for x in L))
+        sort(L,left,p-1)
+        sort(L,p+1,right)
+    l = 0
+    r = len(L)-1
+    sort(L, l, r)
 
-    pivot = lst[len(lst) - 1]
-    print(pivot)
+def our_quicksorts(L):
+    copy = dual_pivot_quicksort(L)
+    copy2 = tri_pivot_quicksort(L)
+    print(copy, copy2)
 
-    n = 0
 
-    print(id(lst[n]))
-    print(id(pivot))
+def dual_pivot_quicksort(L):
+    if len(L) < 2:
+        return L
 
-    while id(lst[n]) != id(pivot):
+    #put the pivots in ascending order
+    if L[0] > L[-1]:
+        L[0], L[-1] = L[-1], L[0]
 
-        print(lst[n])
+    pivot1 = L[0]
+    pivot2 = L[-1]
+    left, right, center = [], [], []
 
-        if lst[n] > pivot:
-
-            lst.append(lst.pop(n))
-            print("qq")
-
+    for num in L[1:-1]:
+        if num <= pivot1:
+            left.append(num)
+        elif pivot1 < num < pivot2:
+            center.append(num)
         else:
-            print("NAH")
-            n+=1
+            right.append(num)
+    return dual_pivot_quicksort(left) + [pivot1] + dual_pivot_quicksort(center) + [pivot2] + dual_pivot_quicksort(right)
 
-    return lst
+def tri_pivot_quicksort(L):
+    mid = len(L)//2
+    if len(L) < 2:
+        return L
 
-sample = [5, 10, 56, 1000, 56, 56, 0, -111111, 29, -29, 10]
+    #put pivots in ascending order
+    if L[0] <= L[-1] <= L[mid]:
+        L[mid], L[-1] = L[-1], L[mid]
+    elif L[mid] <= L[-1] <= L[0]:
+        L[0], L[mid], L[-1] = L[mid], L[-1], L[0]
+    elif L[mid] <= L[0] <= L[-1]:
+        L[0], L[mid] = L[mid], L[0]
+    elif L[-1] <= L[mid] <= L[0]:
+        L[0], L[mid], L[-1] = L[-1], L[mid], L[0]
+    elif L[-1] <= L[0] <= L[mid]:
+        L[0], L[mid], L[-1] = L[-1], L[0], L[mid]
 
-print(quicksort_inplace(sample))
+    pivot1 = L[0]
+    pivot2 = L[mid]
+    pivot3 = L[-1]
+    left, left_center, right_center, right = [], [], [], []
+
+    for i in range(1, len(L)-1):
+        if i == mid:
+            continue
+        elif L[i] <= pivot1:
+            left.append(L[i])
+        elif pivot1 < L[i] <= pivot2:
+            left_center.append(L[i])
+        elif pivot2 < L[i] <= pivot3:
+            right_center.append(L[i])
+        else:
+            right.append(L[i])
+    return tri_pivot_quicksort(left) + [pivot1] + tri_pivot_quicksort(left_center) + \
+           [pivot2] + tri_pivot_quicksort(right_center) + [pivot3] + tri_pivot_quicksort(right)
+
 
 #def dual_pivot_quicksort(lst):
 
