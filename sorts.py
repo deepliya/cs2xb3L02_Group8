@@ -1,7 +1,7 @@
 import random
 
 def quicksort_inplace(L):
-    def sort(L,left,right):
+    def partition(L,left,right):
         if right-left<1: 
             return
         pivot = L[right]
@@ -11,11 +11,11 @@ def quicksort_inplace(L):
                 L[i],L[p] = L[p],L[i]
                 p+=1
         L[p],L[right]=L[right],L[p]
-        sort(L,left,p-1)
-        sort(L,p+1,right)
-    l = 0
-    r = len(L)-1
-    sort(L, l, r)
+        partition(L,left,p-1)
+        partition(L,p+1,right)
+    left = 0
+    right = len(L)-1
+    partition(L, left, right)
     return (L)
 
 def our_quicksorts(L):
