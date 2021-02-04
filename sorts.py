@@ -18,9 +18,6 @@ def quicksort_inplace(L):
     sort(L, l, r)
     return (L)
 
-
-quicksort_inplace(sample)
-
 def our_quicksorts(L):
     copy = dual_pivot_quicksort(L)
     copy2 = tri_pivot_quicksort(L)
