@@ -1,4 +1,5 @@
 import random
+import timeit
 
 def quicksort_inplace(L):
     def partition(L,left,right):
