@@ -47,7 +47,12 @@ def dual_pivot_quicksort(L):
 
 def tri_pivot_quicksort(L):
     mid = len(L)//2
+
     if len(L) < 2:
+        return L
+    elif len(L) == 2:
+        if L[1] < L[0]:
+            L[0], L[1] = L[1], L[0]
         return L
 
     #put pivots in ascending order
@@ -83,3 +88,61 @@ def tri_pivot_quicksort(L):
 
 
 def quad_pivot_quicksort(lst):
+    mid1 = len(L) // 3
+    mid2 = mid1 * 2
+
+    if len(L) < 2:
+        return L
+    elif len(L) == 2:
+        if L[1] < L[0]:
+            L[0], L[1] = L[1], L[0]
+        return L
+    elif len(L) == 3:
+        L = tri_pivot_quicksort(L)
+        return L
+
+    pivots_lst = [L[0], L[mid1], L[mid2], L[-1]]
+
+    # put pivots in ascending order
+    new_pivots_lst = tri_pivot_quicksort(pivots_lst)
+
+    pivot1 = new_pivots_lst[0]
+    pivot2 = new_pivots_lst[1]
+    pivot3 = new_pivots_lst[2]
+    pivot4 = new_pivots_lst[3]
+    left, left_center, center, right_center, right = [], [], [], [], []
+
+    for i in range(1, len(L) - 1):
+        if i == mid1 or i == mid2:
+            continue
+        elif L[i] <= pivot1:
+            left.append(L[i])
+        elif pivot1 < L[i] <= pivot2:
+            left_center.append(L[i])
+        elif pivot2 < L[i] <= pivot3:
+            center.append(L[i])
+        elif pivot3 < L[i] <= pivot4:
+            right_center.append(L[i])
+        else:
+            right.append(L[i])
+    return quad_pivot_quicksort(left) + [pivot1] + quad_pivot_quicksort(left_center) + \
+           [pivot2] + quad_pivot_quicksort(center) + [pivot3] + quad_pivot_quicksort(right_center) \
+           + [pivot4] + quad_pivot_quicksort(right)
+
+
+def create_random_list(n):
+    L = []
+    for _ in range(n):
+        L.append(random.randint(1, n))
+    return L
+
+
+def timetest(runs, length, sort):
+    total = 0
+    for _ in range(runs):
+        L = create_random_list(length)
+        start = timeit.default_timer()
+        sort(L)
+        end = timeit.default_timer()
+        total += end - start
+    return total / runs
