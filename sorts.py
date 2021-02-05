@@ -1,6 +1,53 @@
 import random
 import timeit
+import math
 
+def bubble_sort(L):
+    for i in range(len(L)):
+        swaps = 0
+        for j in range(len(L) - 1 - i):
+            if L[j] > L[j + 1]:
+                swap(L, j, j + 1)
+                swaps += 1
+        if swaps == 0:
+            return
+
+
+def swap(L, i, j):
+    temp = L[i]
+    L[i] = L[j]
+    L[j] = temp
+
+
+def insertion_sort(L):
+    for i in range(1, len(L)):
+        insert_into(L, i)
+
+
+def insert_into(L, n):
+    i = n
+    while i > 0:
+        if L[i] < L[i - 1]:
+            swap(L, i, i-1)
+        else:
+            return
+        i -= 1
+
+
+def selection_sort(L):
+    for i in range(len(L)):
+        mindex = find_min_index(L.i)
+        swap(L, i, mindex)
+
+
+def find_min_index(L, n):
+    mindex = n
+    for i in range(n + 1, len(L)):
+        if L[i] < L[mindex]:
+            mindex = i
+    return mindex
+
+#Quicksort functions
 def quicksort_inplace(L):
     def partition(L,left,right):
         if right-left<1: 
@@ -130,13 +177,24 @@ def quad_pivot_quicksort(lst):
            + [pivot4] + quad_pivot_quicksort(right)
 
 
+#List Creation Section
 def create_random_list(n):
     L = []
     for _ in range(n):
         L.append(random.randint(1, n))
     return L
 
+def create_near_sorted_list(n, factor):
+    L = create_random_list(n)
+    L.sort()
+    for _ in range(math.ceil(n*factor)):
+        index1 = random.randint(0, n-1)
+        index2 = random.randint(0, n-1)
+        L[index1], L[index2] = L[index2], L[index1]
+    return L
 
+
+#Timetesting Section
 def timetest(runs, length, sort):
     total = 0
     for _ in range(runs):
@@ -146,4 +204,17 @@ def timetest(runs, length, sort):
         end = timeit.default_timer()
         total += end - start
     return total / runs
->>>>>>> ddb0cd53f79650e6c660d91fa89ad39250baa0d6
+
+def timetest_worstcase(runs, length, sort):
+    total = 0
+    for _ in range(runs):
+        L = create_near_sorted_list(length, 0.001)
+        start = timeit.default_timer()
+        sort(L)
+        end = timeit.default_timer()
+        total += end - start
+    return total / runs
+
+for i in range(0, 1000):
+    print(i, timetest(25, i, dual_pivot_quicksort), timetest_worstcase(25, i, dual_pivot_quicksort))
+
