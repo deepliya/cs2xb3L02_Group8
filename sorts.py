@@ -132,6 +132,7 @@ def quad_pivot_quicksort(lst):
            + [pivot4] + quad_pivot_quicksort(right)
 
 
+#List Creation Section
 def create_random_list(n):
     L = []
     for _ in range(n):
@@ -148,6 +149,7 @@ def create_near_sorted_list(n, factor):
     return L
 
 
+#Timetesting Section
 def timetest(runs, length, sort):
     total = 0
     for _ in range(runs):
