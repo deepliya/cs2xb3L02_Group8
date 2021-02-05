@@ -146,7 +146,7 @@ def tri_pivot_quicksort(L):
     return tri_pivot_quicksort(left) + [pivot1] + tri_pivot_quicksort(left_center) + \
            [pivot2] + tri_pivot_quicksort(right_center) + [pivot3] + tri_pivot_quicksort(right)
 
-def quad_pivot_quicksort(lst):
+def quad_pivot_quicksort(L):
     mid1 = len(L) // 3
     mid2 = mid1 * 2
 
@@ -188,6 +188,26 @@ def quad_pivot_quicksort(lst):
            [pivot2] + quad_pivot_quicksort(center) + [pivot3] + quad_pivot_quicksort(right_center) \
            + [pivot4] + quad_pivot_quicksort(right)
 
+def final_sort(L):
+    if len(L) < 6:
+        insertion_sort(L)
+
+    #put the pivots in ascending order
+    if L[0] > L[-1]:
+        L[0], L[-1] = L[-1], L[0]
+
+    pivot1 = L[0]
+    pivot2 = L[-1]
+    left, right, center = [], [], []
+
+    for num in L[1:-1]:
+        if num <= pivot1:
+            left.append(num)
+        elif pivot1 < num < pivot2:
+            center.append(num)
+        else:
+            right.append(num)
+    return dual_pivot_quicksort(left) + [pivot1] + dual_pivot_quicksort(center) + [pivot2] + dual_pivot_quicksort(right)
 
 #List Creation Section
 def create_random_list(n):
