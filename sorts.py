@@ -1,5 +1,6 @@
 import random
 import timeit
+import math
 
 def quicksort_inplace(L):
     def partition(L,left,right):
@@ -137,6 +138,15 @@ def create_random_list(n):
         L.append(random.randint(1, n))
     return L
 
+def create_near_sorted_list(n, factor):
+    L = create_random_list(n)
+    L.sort()
+    for _ in range(math.ceil(n*factor)):
+        index1 = random.randint(0, n-1)
+        index2 = random.randint(0, n-1)
+        L[index1], L[index2] = L[index2], L[index1]
+    return L
+
 
 def timetest(runs, length, sort):
     total = 0
@@ -147,3 +157,16 @@ def timetest(runs, length, sort):
         end = timeit.default_timer()
         total += end - start
     return total / runs
+
+def timetest_worstcase(runs, length, sort):
+    total = 0
+    for _ in range(runs):
+        L = create_near_sorted_list(length, 0.001)
+        start = timeit.default_timer()
+        sort(L)
+        end = timeit.default_timer()
+        total += end - start
+    return total / runs
+
+for i in range(0, 1000):
+    print(i, timetest(25, i, dual_pivot_quicksort), timetest_worstcase(25, i, dual_pivot_quicksort))
