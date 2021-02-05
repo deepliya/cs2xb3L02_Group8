@@ -47,6 +47,7 @@ def find_min_index(L, n):
             mindex = i
     return mindex
 
+#Quicksort functions
 def quicksort_inplace(L):
     def partition(L,left,right):
         if right-left<1: 
