@@ -49,6 +49,16 @@ def find_min_index(L, n):
             mindex = i
     return mindex
 
+def final_sort(L):
+
+    if (len(L) < 7):
+
+        return insertion_sort(L)
+
+    else:
+
+        return dual_pivot_quicksort(L)
+
 #Quicksort functions
 def quicksort_inplace(L):
     def partition(L,left,right):
@@ -226,6 +236,5 @@ def timetest_nearsorted(factor, sort):
     end = timeit.default_timer()
     return end - start
 
-for i in range(1, 101):
-    L = create_random_list(1000)
-    print(timetest_nearsorted(i, bubble_sort(L)))
+for i in range(1, 11):
+    print(timetest(50, i, final_sort))
