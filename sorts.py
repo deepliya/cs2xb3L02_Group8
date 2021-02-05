@@ -2,6 +2,7 @@ import random
 import timeit
 import math
 
+#Sorting Functions
 def bubble_sort(L):
     for i in range(len(L)):
         swaps = 0
@@ -10,7 +11,7 @@ def bubble_sort(L):
                 swap(L, j, j + 1)
                 swaps += 1
         if swaps == 0:
-            return
+            return L
 
 
 def swap(L, i, j):
@@ -22,6 +23,7 @@ def swap(L, i, j):
 def insertion_sort(L):
     for i in range(1, len(L)):
         insert_into(L, i)
+    return L
 
 
 def insert_into(L, n):
@@ -33,11 +35,11 @@ def insert_into(L, n):
             return
         i -= 1
 
-
 def selection_sort(L):
     for i in range(len(L)):
-        mindex = find_min_index(L.i)
+        mindex = find_min_index(L, i)
         swap(L, i, mindex)
+    return L
 
 
 def find_min_index(L, n):
@@ -184,6 +186,7 @@ def create_random_list(n):
         L.append(random.randint(1, n))
     return L
 
+
 def create_near_sorted_list(n, factor):
     L = create_random_list(n)
     L.sort()
@@ -215,6 +218,14 @@ def timetest_worstcase(runs, length, sort):
         total += end - start
     return total / runs
 
-for i in range(0, 1000):
-    print(i, timetest(25, i, dual_pivot_quicksort), timetest_worstcase(25, i, dual_pivot_quicksort))
+def timetest_nearsorted(factor, sort):
 
+    L = create_near_sorted_list(1000, factor)
+    start = timeit.default_timer()
+    selection_sort(L)
+    end = timeit.default_timer()
+    return end - start
+
+for i in range(1, 101):
+    L = create_random_list(1000)
+    print(timetest_nearsorted(i, bubble_sort(L)))
