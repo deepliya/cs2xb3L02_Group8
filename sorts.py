@@ -2,6 +2,51 @@ import random
 import timeit
 import math
 
+def bubble_sort(L):
+    for i in range(len(L)):
+        swaps = 0
+        for j in range(len(L) - 1 - i):
+            if L[j] > L[j + 1]:
+                swap(L, j, j + 1)
+                swaps += 1
+        if swaps == 0:
+            return
+
+
+def swap(L, i, j):
+    temp = L[i]
+    L[i] = L[j]
+    L[j] = temp
+
+
+def insertion_sort(L):
+    for i in range(1, len(L)):
+        insert_into(L, i)
+
+
+def insert_into(L, n):
+    i = n
+    while i > 0:
+        if L[i] < L[i - 1]:
+            swap(L, i, i-1)
+        else:
+            return
+        i -= 1
+
+
+def selection_sort(L):
+    for i in range(len(L)):
+        mindex = find_min_index(L.i)
+        swap(L, i, mindex)
+
+
+def find_min_index(L, n):
+    mindex = n
+    for i in range(n + 1, len(L)):
+        if L[i] < L[mindex]:
+            mindex = i
+    return mindex
+
 def quicksort_inplace(L):
     def partition(L,left,right):
         if right-left<1: 
