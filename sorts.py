@@ -181,7 +181,10 @@ def quad_pivot_quicksort(L):
 def final_sort(L):
     mid1 = len(L)//3
     mid2 = mid1*2
-    if len(L) < 6:
+
+    if len(L) == 0:
+        return []
+    elif len(L) < 6:
         insertion_sort(L)
 
     #put the pivots in ascending order
@@ -193,13 +196,15 @@ def final_sort(L):
 
     left, right, center = [], [], []
 
-    for num in L[1:-1]:
-        if num <= pivot1:
-            left.append(num)
-        elif pivot1 < num < pivot2:
-            center.append(num)
+    for i in range(len(L)):
+        if i == mid1 or i == mid2:
+            continue
+        if L[i] <= pivot1:
+            left.append(L[i])
+        elif pivot1 < L[i] <= pivot2:
+            center.append(L[i])
         else:
-            right.append(num)
+            right.append(L[i])
     return final_sort(left) + [pivot1] + final_sort(center) + [pivot2] + final_sort(right)
 
 #List Creation Section
