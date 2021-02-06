@@ -49,16 +49,6 @@ def find_min_index(L, n):
             mindex = i
     return mindex
 
-def final_sort(L):
-
-    if (len(L) < 7):
-
-        return insertion_sort(L)
-
-    else:
-
-        return dual_pivot_quicksort(L)
-
 #Quicksort functions
 def quicksort_inplace(L):
     def partition(L,left,right):
