@@ -179,28 +179,18 @@ def quad_pivot_quicksort(L):
            + [pivot4] + quad_pivot_quicksort(right)
 
 def final_sort(L):
+    mid1 = len(L)//3
+    mid2 = mid1*2
     if len(L) < 6:
         insertion_sort(L)
 
     #put the pivots in ascending order
-    if len(L) > 150:
-        p1 = random.randint(0, len(L))
-        p2 = random.randint(0, len(L))
-        if L[p1] > L[p2]:
-            L[p1], L[p2] = L[p2], L[p1]
-            pivot1 = p2
-            pivot2 = p1
-        else:
-            pivot1 = p1
-            pivot2 = p2
+    if L[mid1] > L[mid2]:
+        L[mid1], L[mid2] = L[mid2], L[mid1]
 
-    elif L[0] > L[-1]:
-        L[0], L[-1] = L[-1], L[0]
-        pivot1 = L[0]
-        pivot2 = L[-1]
-    else:
-        pivot1 = L[0]
-        pivot2 = L[-1]
+    pivot1 = L[mid1]
+    pivot2 = L[mid2]
+
     left, right, center = [], [], []
 
     for num in L[1:-1]:
@@ -210,7 +200,7 @@ def final_sort(L):
             center.append(num)
         else:
             right.append(num)
-    return dual_pivot_quicksort(left) + [pivot1] + dual_pivot_quicksort(center) + [pivot2] + dual_pivot_quicksort(right)
+    return final_sort(left) + [pivot1] + final_sort(center) + [pivot2] + final_sort(right)
 
 #List Creation Section
 def create_random_list(n):
