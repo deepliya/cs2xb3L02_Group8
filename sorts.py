@@ -193,11 +193,24 @@ def final_sort(L):
         insertion_sort(L)
 
     #put the pivots in ascending order
-    if L[0] > L[-1]:
-        L[0], L[-1] = L[-1], L[0]
+    if len(L) > 150:
+        p1 = random.randint(0, len(L))
+        p2 = random.randint(0, len(L))
+        if L[p1] > L[p2]:
+            L[p1], L[p2] = L[p2], L[p1]
+            pivot1 = p2
+            pivot2 = p1
+        else:
+            pivot1 = p1
+            pivot2 = p2
 
-    pivot1 = L[0]
-    pivot2 = L[-1]
+    elif L[0] > L[-1]:
+        L[0], L[-1] = L[-1], L[0]
+        pivot1 = L[0]
+        pivot2 = L[-1]
+    else:
+        pivot1 = L[0]
+        pivot2 = L[-1]
     left, right, center = [], [], []
 
     for num in L[1:-1]:
