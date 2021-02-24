@@ -24,11 +24,11 @@ class Heap:
 
     def is_heap(self):
         for i in range(self.length):
-            if 2 * i + 2 < self.length:
-                if self.data[2 * i + 1] > self.data[i] or self.data[2 * i + 2] > self.data[i]:
+            if self.right(i) < self.length:
+                if self.data[self.left(i)] > self.data[i] or self.data[self.right(i)] > self.data[i]:
                     return False
-            elif 2 * i + 1 < self.length:
-                if self.data[2 * i + 1] > self.data[i]:
+            elif self.left(i) < self.length:
+                if self.data[self.left(i)] > self.data[i]:
                     return False
         return True
 
