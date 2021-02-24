@@ -13,10 +13,10 @@ class Heap:
         for i in range(self.length // 2 - 1, -1, -1):
             self.sink(i)
 
-    def build_heap2(self):
+    #def build_heap2(self):
         #TODO
 
-    def build_heap3(self):
+    #def build_heap3(self):
         #TODO
 
     def sink(self, i):
