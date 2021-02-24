@@ -16,8 +16,21 @@ class Heap:
     #def build_heap2(self):
         #TODO
 
-    #def build_heap3(self):
-        #TODO
+    def build_heap3(self):
+        for i in range(self.length):
+            self.sink(i)
+        if not self.is_heap():
+            self.build_heap3()
+
+    def is_heap(self):
+        for i in range(self.length):
+            if 2 * i + 2 < self.length:
+                if self.data[2 * i + 1] > self.data[i] or self.data[2 * i + 2] > self.data[i]:
+                    return False
+            elif 2 * i + 1 < self.length:
+                if self.data[2 * i + 1] > self.data[i]:
+                    return False
+        return True
 
     def sink(self, i):
         largest_known = i
