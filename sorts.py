@@ -184,8 +184,9 @@ def final_sort(L):
 
     #put the pivots in ascending order
     if len(L) > 150:
-        p1 = random.randint(0, len(L))
-        p2 = random.randint(0, len(L))
+        pivotList = random.sample(range(0, len(L)),2)
+        p1 = pivotList[0]
+        p2 = pivotList[1]
         if L[p1] > L[p2]:
             L[p1], L[p2] = L[p2], L[p1]
             pivot1 = p2
