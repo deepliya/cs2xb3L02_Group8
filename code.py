@@ -1,33 +1,38 @@
-from sorts import *
+import timeit
+import random 
+from heap.py import *
 
-#Timetesting Section
-def timetest(runs, length, sort):
-    total = 0
+def create_random_list(n):
+    return [random.random() for _ in range(n)]
+
+def time_test(n, runs):
+    total1 = 0
+    total2 = 0
+    total3 = 0
+
     for _ in range(runs):
-        L = create_random_list(length)
+        L = create_random_list(n)
+        heap1 = Heap(L)
         start = timeit.default_timer()
-        sort(L)
-        end = timeit.default_timer()
-        total += end - start
-    return total / runs
+        heap1.build_heap1()
+        total1 += timeit.default_timer() - start
+    runtime1 = total1 / runs
 
-def timetest_worstcase(runs, length, sort):
-    total = 0
     for _ in range(runs):
-        L = create_near_sorted_list(length, 0.001)
+        L = create_random_list(n)
+        heap1 = Heap(L)
         start = timeit.default_timer()
-        sort(L)
-        end = timeit.default_timer()
-        total += end - start
-    return total / runs
+        heap1.build_heap2()
+        total2 += timeit.default_timer() - start
+    runtime2 = total2 / runs
 
-def timetest_nearsorted(factor, sort):
-
-    L = create_near_sorted_list(1000, factor)
-    start = timeit.default_timer()
-    selection_sort(L)
-    end = timeit.default_timer()
-    return end - start
+    for _ in range(runs):
+        L = create_random_list(n)
+        heap1 = Heap(L)
+        start = timeit.default_timer()
+        heap1.build_heap3()
+        total3 += timeit.default_timer() - start
+    runtime3 = total3 / runs
 
 def timetest2(runs, length, sort):
     total = 0
@@ -39,5 +44,4 @@ def timetest2(runs, length, sort):
         total += end - start
     return total / runs
 
-for i in range(100, 10000, 100):
-    print(i, timetest2(50, i, final_sort))
+    return runtime1, runtime2, runtime3
