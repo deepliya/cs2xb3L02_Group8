@@ -35,3 +35,6 @@ def time_test(n, runs):
     runtime3 = total3 / runs
 
     return runtime1, runtime2, runtime3
+
+for i in range(1, 1001):
+    print(time_test(i, 20))
