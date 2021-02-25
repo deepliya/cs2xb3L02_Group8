@@ -1,5 +1,6 @@
 import timeit
 import random 
+from heap.py import *
 
 def create_random_list(n):
     return [random.random() for _ in range(n)]
