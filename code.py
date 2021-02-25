@@ -29,5 +29,15 @@ def timetest_nearsorted(factor, sort):
     end = timeit.default_timer()
     return end - start
 
-for i in range(1, 1001):
-    print(timetest(1, i, dual_pivot_quicksort))
+def timetest2(runs, length, sort):
+    total = 0
+    for _ in range(runs):
+        L = create_near_sorted_list(length, 0.2)
+        start = timeit.default_timer()
+        sort(L)
+        end = timeit.default_timer()
+        total += end - start
+    return total / runs
+
+for i in range(100, 10000, 100):
+    print(i, timetest2(50, i, final_sort))
