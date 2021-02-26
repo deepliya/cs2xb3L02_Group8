@@ -13,8 +13,11 @@ class Heap:
         for i in range(self.length // 2 - 1, -1, -1):
             self.sink(i)
 
-    #def build_heap2(self):
-        #TODO
+    def build_heap2(self):
+        heap_values = self.data
+        self.data = []
+        self.length = 0
+        self.insert_values(heap_values)
 
     def build_heap3(self):
         for i in range(self.length):
