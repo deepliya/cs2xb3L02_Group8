@@ -1,3 +1,6 @@
+import random
+import math
+
 class k_heap:
     
     length = 0
@@ -45,7 +48,17 @@ class k_heap:
         if len(self.data) > 0:
             return self.data[0]
 
-L = [0, -1]
-heap = k_heap(L, 2)
+def create_random(n):
 
+    L = []
+
+    for _ in range(n):
+
+        L.append(random.randint(0,100))
+
+    return L
+
+L = create_random(5)
+print(L)
+heap = k_heap(L, 10)
 print(heap.get_max())
