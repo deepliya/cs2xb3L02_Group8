@@ -56,7 +56,7 @@ class RBNode:
         self.left.parent = self.parent
         if self.is_left_child():
             self.parent.left = self.left
-        else:
+        elif self.is_right_child():
             self.parent.right = self.right
 
     def rotate_left(self):
@@ -65,7 +65,7 @@ class RBNode:
         self.right.parent = self.parent
         if self.is_left_child():
             self.parent.left = self.left
-        else:
+        elif self.is_right_child():
             self.parent.right = self.right
 
 
