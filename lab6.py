@@ -39,6 +39,9 @@ class RBNode:
     def get_uncle(self):
         return self.parent.get_brother()
 
+    def get_grandparent(self):
+        return self.parent.parent
+
     def uncle_is_black(self):
         if self.get_uncle() == None:
             return True
@@ -100,11 +103,36 @@ class RBTree:
                 self.__insert(node.right, value)
 
     def fix(self, node):
-        #You may alter code in this method if you wish, it's merely a guide.
+
         if node.parent == None:
             node.make_black()
         while node != None and node.parent != None and node.parent.is_red(): 
-            #TODO
+            if node.parent == node.get_grandparent().left:
+                if node.get_uncle().is_red():
+                    node.parent.make_black()
+                    node.get_uncle().make_black()
+                    node.get_grandparent().make_red()
+                    node = node.get_grandparent()
+                else:
+                    if node == node.parent.right:
+                        node = node.parent
+                        node.rotate_left()
+                    node.parent.make_black()
+                    node.get_grandparent().make_red()
+                    node.get_grandparent().rotate_right()
+            else:
+                if node.get_uncle().is_red():
+                    node.parent.make_black()
+                    node.get_uncle().make_black()
+                    node.get_grandparent().make_red()
+                    node = node.get_grandparent()
+                else:
+                    if node == node.parent.left:
+                        node = node.parent
+                        node.rotate_right()
+                    node.parent.make_black()
+                    node.get_grandparent().make_red()
+                    node.get_grandparent().rotate_left()
         self.root.make_black()
                     
         
