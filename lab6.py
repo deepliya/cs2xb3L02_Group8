@@ -119,31 +119,33 @@ class RBTree:
             node.make_black()
         while node != None and node.parent != None and node.parent.is_red(): 
             if node.parent == node.get_grandparent().left:
-                if node.get_uncle().is_red():
-                    node.parent.make_black()
-                    node.get_uncle().make_black()
-                    node.get_grandparent().make_red()
-                    node = node.get_grandparent()
-                else:
-                    if node == node.parent.right:
-                        node = node.parent
-                        node.rotate_left()
-                    node.parent.make_black()
-                    node.get_grandparent().make_red()
-                    node.get_grandparent().rotate_right()
+                if node.get_uncle() != None:
+                    if node.get_uncle().is_red():
+                        node.parent.make_black()
+                        node.get_uncle().make_black()
+                        node.get_grandparent().make_red()
+                        node = node.get_grandparent()
+                    else:
+                        if node == node.parent.right:
+                            node = node.parent
+                            node.rotate_left()
+                        node.parent.make_black()
+                        node.get_grandparent().make_red()
+                        node.get_grandparent().rotate_right()
             else:
-                if node.get_uncle().is_red():
-                    node.parent.make_black()
-                    node.get_uncle().make_black()
-                    node.get_grandparent().make_red()
-                    node = node.get_grandparent()
-                else:
-                    if node == node.parent.left:
-                        node = node.parent
-                        node.rotate_right()
-                    node.parent.make_black()
-                    node.get_grandparent().make_red()
-                    node.get_grandparent().rotate_left()
+                if node.get_uncle() != None:
+                    if node.get_uncle().is_red():
+                        node.parent.make_black()
+                        node.get_uncle().make_black()
+                        node.get_grandparent().make_red()
+                        node = node.get_grandparent()
+                    else:
+                        if node == node.parent.left:
+                            node = node.parent
+                            node.rotate_right()
+                        node.parent.make_black()
+                        node.get_grandparent().make_red()
+                        node.get_grandparent().rotate_left()
         self.root.make_black()
                     
         
@@ -161,4 +163,9 @@ class RBTree:
             return "[" +  self.__str_helper(node.left) + " <- " + str(node) + "]"
         return "[" + self.__str_helper(node.left) + " <- " + str(node) + " -> " + self.__str_helper(node.right) + "]"
 
+t = RBTree()
 
+t.insert(5)
+print(t)
+t.insert(4)
+print(t)
