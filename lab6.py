@@ -54,11 +54,22 @@ class RBNode:
          return "(" + str(self.value) + "," + self.colour + ")"
 
     def rotate_right(self):
-        #TODO
+        self.parent = self.left
+        self.left = self.left.right
+        self.left.parent = self.parent
+        if self.is_left_child():
+            self.parent.left = self.left
+        elif self.is_right_child():
+            self.parent.right = self.right
 
     def rotate_left(self):
-        #TODO
-
+        self.parent = self.right
+        self.right = self.right.left
+        self.right.parent = self.parent
+        if self.is_left_child():
+            self.parent.left = self.left
+        elif self.is_right_child():
+            self.parent.right = self.right
 
 
 class RBTree:
