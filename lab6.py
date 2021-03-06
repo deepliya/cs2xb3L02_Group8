@@ -123,20 +123,26 @@ class RBTree:
                 self.__insert(node.right, value)
 
     def fix(self, node):
+
         if node.parent == None:
+
             node.make_black()
+
         while node != None and node.parent != None and node.parent.is_red():
+
             if node.parent == node.get_grandparent().left: 
 
                 y = RBNode(node.get_grandparent().right) 
 
                 if y.is_red():
+
                     node.parent.make_black()
                     y.make_black()
                     node.get_grandparent().make_red()
                     node = node.get_grandparent()
 
                 else:
+
                     if node == node.parent.right:
                         node = node.parent
                         node.rotate_left()
@@ -146,7 +152,8 @@ class RBTree:
                     node.get_grandparent().rotate_right()
 
             else:
-                y = RBNode(node.get_grandparent().left) 
+
+                y = RBNode(node.get_grandparent().left)
 
                 if y.is_red():
                     node.parent.make_black()
@@ -181,18 +188,5 @@ class RBTree:
 
 t = RBTree()
 
-t.insert(5)
-t.insert(4)
-print(t)
-t.insert(7)
-print(t)
-t.insert(3)
-print(t)
-t.insert(6)
-print(t)
-t.insert(8)
-print(t)
-t.insert(10)
-print(t)
-t.insert(1)
-print(t)
+for i in range(1, 101):
+    t.insert(i)
