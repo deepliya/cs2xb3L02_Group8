@@ -51,22 +51,34 @@ class RBNode:
          return "(" + str(self.value) + "," + self.colour + ")"
 
     def rotate_right(self):
-        self.parent = self.left
-        self.left = self.left.right
-        self.left.parent = self.parent
-        if self.is_left_child():
-            self.parent.left = self.left
-        elif self.is_right_child():
-            self.parent.right = self.right
+        x = self.left
+        self.left = x.right
+        if x.right != None:
+            x.right.parent = self
+        x.parent = self.parent
+        if self.parent == None:
+            self.root = x
+        elif self.value == self.parent.right:
+            self.parent.right = x
+        else:
+            self.parent.left = x
+        x.left = self
+        self.parent = x
 
     def rotate_left(self):
-        self.parent = self.right
-        self.right = self.right.left
-        self.right.parent = self.parent
-        if self.is_left_child():
-            self.parent.left = self.left
-        elif self.is_right_child():
-            self.parent.right = self.right
+        x = self.right
+        self.right = x.left
+        if x.left != None:
+            x.left.parent = self
+        x.parent = self.parent
+        if self.parent == None:
+            self.root = x
+        elif self.value == self.parent.left:
+            self.parent.left = x
+        else:
+            self.parent.right = x
+        x.right = self
+        self.parent = x
 
 
 class RBTree:
@@ -111,41 +123,47 @@ class RBTree:
                 self.__insert(node.right, value)
 
     def fix(self, node):
-
         if node.parent == None:
             node.make_black()
-        while node != None and node.parent != None and node.parent.is_red(): 
-            if node.parent == node.get_grandparent().left:
-                if node.get_uncle() != None:
-                    if node.get_uncle().is_red():
-                        node.parent.make_black()
-                        node.get_uncle().make_black()
-                        node.get_grandparent().make_red()
-                        node = node.get_grandparent()
-                    else:
-                        if node == node.parent.right:
-                            node = node.parent
-                            node.rotate_left()
-                        node.parent.make_black()
-                        node.get_grandparent().make_red()
-                        node.get_grandparent().rotate_right()
+        while node != None and node.parent != None and node.parent.is_red():
+            if node.parent == node.get_grandparent().left: 
+
+                y = RBNode(node.get_grandparent().right) 
+
+                if y.is_red():
+                    node.parent.make_black()
+                    y.make_black()
+                    node.get_grandparent().make_red()
+                    node = node.get_grandparent()
+
+                else:
+                    if node == node.parent.right:
+                        node = node.parent
+                        node.rotate_left()
+
+                    node.make_black() 
+                    node.get_grandparent().make_red()
+                    node.get_grandparent().rotate_right()
+
             else:
-                if node.get_uncle() != None:
-                    if node.get_uncle().is_red():
-                        node.parent.make_black()
-                        node.get_uncle().make_black()
-                        node.get_grandparent().make_red()
-                        node = node.get_grandparent()
-                    else:
-                        if node == node.parent.left:
-                            node = node.parent
-                            node.rotate_right()
-                        node.parent.make_black()
-                        node.get_grandparent().make_red()
-                        node.get_grandparent().rotate_left()
+                y = RBNode(node.get_grandparent().left) 
+
+                if y.is_red():
+                    node.parent.make_black()
+                    y.make_black()
+                    node.get_grandparent().make_red()
+                    node = node.get_grandparent()
+
+                else:
+                    if node == node.parent.left:
+                        node = node.parent
+                        node.rotate_right()
+
+                    node.parent.make_black()
+                    node.get_grandparent().make_red()
+                    node.get_grandparent().rotate_left()
         self.root.make_black()
-                    
-        
+    
     def __str__(self):
         if self.is_empty():
             return "[]"
@@ -166,3 +184,16 @@ t.insert(5)
 print(t)
 t.insert(4)
 print(t)
+t.insert(7)
+print(t)
+t.insert(3)
+print(t)
+t.insert(6)
+print(t)
+t.insert(8)
+print(t)
+t.insert(10)
+print(t)
+t.insert(1)
+print(t)
+
