@@ -114,7 +114,21 @@ class RBTree:
 
         if node.parent == None:
             node.make_black()
-        while node != None and node.parent != None and node.parent.is_red(): 
+
+        while node != None and node.parent != None and node.parent.is_red():
+
+            if node.parent == None:
+                print('1')
+                print(node)
+
+            elif node.get_grandparent() == None:
+                print('2')
+                print(node)
+
+            elif node.get_uncle() == None:
+                print('3')
+                print(node)
+
             if node.parent == node.get_grandparent().left:
                 if node.get_uncle() != None:
                     if node.get_uncle().is_red():
@@ -129,6 +143,8 @@ class RBTree:
                         node.parent.make_black()
                         node.get_grandparent().make_red()
                         node.get_grandparent().rotate_right()
+                else:
+                    node = node.get_grandparent()
             else:
                 if node.get_uncle() != None:
                     if node.get_uncle().is_red():
@@ -143,6 +159,8 @@ class RBTree:
                         node.parent.make_black()
                         node.get_grandparent().make_red()
                         node.get_grandparent().rotate_left()
+                else:
+                    node = node.get_grandparent()
         self.root.make_black()
                     
         
@@ -163,6 +181,11 @@ class RBTree:
 t = RBTree()
 
 t.insert(5)
-print(t)
 t.insert(4)
+t.insert(6)
+t.insert(8)
+t.insert(10)
+t.insert(10000)
+t.insert(5)
+
 print(t)
