@@ -60,6 +60,27 @@ def DFS(G, node1, node2):
                 S.append(node)
     return False
 
+#BFS2 & DFS2
+
+def BFS2(G, node1, node2):
+    Q = deque([node1])
+    marked = {node1 : True}
+    lst = []
+    for node in G.adj:
+        if node != node1:
+            marked[node] = False
+    while len(Q) != 0:
+        current_node = Q.popleft()
+        lst.append(current_node)
+        for node in G.adj[current_node]:
+            if node == node2:
+                lst.append(node)
+                return lst
+            if not marked[node]:
+                Q.append(node)
+                marked[node] = True
+    return []
+
 def DFS2(G, node1, node2):
     S = [node1]
     marked = {}
