@@ -110,7 +110,10 @@ def is_connected(G):
     for node1 in G.adj:
         for node2 in G.adj:
             if node2 not in checked[node1] and node1 not in checked[node2]:
+
                 checked[node1].append(node2)
+                checked[node2].append(node1)
+
                 if BFS(G, node1, node2):
                     return True
 
