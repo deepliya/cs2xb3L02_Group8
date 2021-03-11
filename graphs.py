@@ -59,3 +59,21 @@ def DFS(G, node1, node2):
                     return True
                 S.append(node)
     return False
+
+def DFS2(G, node1, node2):
+    S = [node1]
+    marked = {}
+    lst = []
+    for node in G.adj:
+        marked[node] = False
+    while len(S) != 0:
+        current_node = S.pop()
+        lst.append(current_node)
+        if not marked[current_node]:
+            marked[current_node] = True
+            for node in G.adj[current_node]:
+                if node == node2:
+                    lst.append(node)
+                    return lst
+                S.append(node)
+    return []
