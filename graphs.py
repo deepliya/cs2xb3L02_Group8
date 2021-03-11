@@ -22,9 +22,8 @@ class Graph:
             self.adj[node1].append(node2)
             self.adj[node2].append(node1)
 
-    def number_of_nodes():
-        return len()
-
+    def number_of_nodes(self):
+        return len(self.adj)
 
 #Breadth First Search
 def BFS(G, node1, node2):
@@ -98,3 +97,21 @@ def DFS2(G, node1, node2):
                     return lst
                 S.append(node)
     return []
+
+def is_connected(G):
+    if len(G.adj) < 2:
+        return False
+
+    checked = {}
+
+    for node in G.adj:
+        checked[node] = []
+
+    for node1 in G.adj:
+        for node2 in G.adj:
+            if node2 not in checked[node1] and node1 not in checked[node2]:
+                checked[node1].append(node2)
+                if BFS(G, node1, node2):
+                    return True
+
+    return False
