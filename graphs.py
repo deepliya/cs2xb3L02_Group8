@@ -154,3 +154,15 @@ def is_connected(G):
 
     return False
 
+def has_cycle(G):
+
+    visited = {}
+
+    for node in G.adj:
+
+        visited[node] = False
+
+    visited[1] = True
+    parent = -1
+
+    
