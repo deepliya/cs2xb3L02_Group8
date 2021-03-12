@@ -1,3 +1,6 @@
+from graphs import *
+import random 
+
 #Testing functions
 def cycle_test(n, e):
     g = Graph(n + 1)
