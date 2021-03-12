@@ -134,9 +134,6 @@ def DFS3(G, node1):
     return pred
 
 def is_connected(G):
-    if len(G.adj) < 2:
-        return False
-
     checked = {}
 
     for node in G.adj:
@@ -149,20 +146,9 @@ def is_connected(G):
                 checked[node1].append(node2)
                 checked[node2].append(node1)
 
-                if BFS(G, node1, node2):
-                    return True
+                if not BFS(G, node1, node2):
+                    return False
 
-    return False
+    return True
 
-def has_cycle(G):
 
-    visited = {}
-
-    for node in G.adj:
-
-        visited[node] = False
-
-    visited[1] = True
-    parent = -1
-
-    
