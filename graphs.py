@@ -136,8 +136,3 @@ def is_connected(G):
 
     return False
 
-G = Graph(5)
-
-G.add_edge(1,2)
-
-print(BFS2(G, 1,1))
