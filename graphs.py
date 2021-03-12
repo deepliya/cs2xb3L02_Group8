@@ -1,4 +1,5 @@
 from collections import deque
+import random
 
 #Undirected graph using an adjacency list
 class Graph:
@@ -98,6 +99,8 @@ def DFS2(G, node1, node2):
                 S.append(node)
     return []
 
+#BFS3 & DFS3
+
 def BFS3(G, node1):
     Q = deque([node1])
     marked = {node1 : True}
@@ -150,5 +153,3 @@ def is_connected(G):
                     return False
 
     return True
-
-
