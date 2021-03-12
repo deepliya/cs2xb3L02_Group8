@@ -98,6 +98,23 @@ def DFS2(G, node1, node2):
                 S.append(node)
     return []
 
+def DFS3(G, node1):
+    S = [node1]
+    marked = {}
+    pred = {}
+    for node in G.adj:
+        marked[node] = False
+    while len(S) != 0:
+        current_node = S.pop()
+        if not marked[current_node]:
+            marked[current_node] = True
+            for node in G.adj[current_node]:
+                if node in pred or node == node1:
+                    continue
+                pred[node] = current_node
+                S.append(node)
+    return pred
+
 def is_connected(G):
     if len(G.adj) < 2:
         return False
