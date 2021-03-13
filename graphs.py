@@ -153,17 +153,13 @@ def is_connected(G):
                     return False
 
     return True
-
 def node_cycle_check(G, node1):
     S = [node1]
     prev = [-1]
     marked = {}
     lst = []
     for node in G.adj:
-        if len(G.adj[node]) == 1:
-            marked[node] = True
-        else:
-            marked[node] = False
+        marked[node] = False
     while len(S) != 0:
         current_node = S.pop()
         prev.insert(0, current_node)
@@ -180,8 +176,24 @@ def node_cycle_check(G, node1):
                 S.append(node)
     return False
 
+
 def has_cycle(G):
-    for i in range(G.number_of_nodes()):
-        if node_cycle_check(G, i) is True:
+    orig_length = G.number_of_nodes()
+    j = 0
+
+    while j < orig_length:
+        for node in G.adj:
+            if len(G.adj[node]) == 1:
+                G.adj[G.adj[node][0]].remove(node)
+                del G.adj[node]
+                break
+            elif len(G.adj[node]) == 0:
+                del G.adj[node]
+                break
+        j += 1
+
+
+    for node in (G.adj):
+        if node_cycle_check(G, node) is True:
             return True
     return False
