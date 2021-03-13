@@ -28,7 +28,7 @@ def cycle_test2(runs, k, c):
 
             G = Graph(k)
 
-            nodes = random.sample(range(0, n), 2)
+            nodes = random.sample(range(0, k), 2)
             G.add_edge(nodes[0], nodes[1])
 
             if has_cycle(G):
