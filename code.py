@@ -11,11 +11,6 @@ def is_connected_test(n, e):
 
 def test2():
     n = 100
-    for c in range(500):
-        counter = 0
+    for c in range (500):
         for i in range(50):
-            if is_connected_test(n, c):
-                counter += 1
-        print(counter, " ", c)
-
-test2()
+            print(is_connected_test(n, c), c)
