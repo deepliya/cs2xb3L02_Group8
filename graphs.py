@@ -182,6 +182,9 @@ def node_cycle_check(G, node1):
     return False
 
 def has_cycle(G):
+    if G.number_of_nodes < 3:
+        return False
+
     for i in range(G.number_of_nodes()):
         if node_cycle_check(G, i) is True:
             return True
