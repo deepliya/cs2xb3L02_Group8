@@ -10,14 +10,6 @@ def cycle_test(n, e):
     print(has_cycle(g))
     return has_cycle(g)
 
-def is_connected_test(n, e):
-    g = Graph(n)
-    for i in range(e):
-        nodes = random.sample(range(0, n), 2)
-        g.add_edge(nodes[0], nodes[1])
-    print(is_connected(g))
-    return is_connected(g)
-
 def cycle_test2(runs, k, c):
 
     for i in range(c):
@@ -76,3 +68,16 @@ def connected_test3(runs, k, c):
         print(counter, " ", i)
 
 connected_test2(100, 100, 5000)
+
+def is_connected_test(n, e):
+    g = Graph(n)
+    for i in range(e):
+        nodes = random.sample(range(0, n), 2)
+        g.add_edge(nodes[0], nodes[1])
+    return is_connected(g)
+
+def test2():
+    n = 100
+    for c in range (500):
+        for i in range(50):
+            print(is_connected_test(n, c), c)
