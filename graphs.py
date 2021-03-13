@@ -162,7 +162,6 @@ def node_cycle_check(G, node1):
     for node in G.adj:
         if len(G.adj[node]) == 1:
             marked[node] = True
-            G.adj[G.adj[node][0]].remove(node)
         else:
             marked[node] = False
     while len(S) != 0:
@@ -177,7 +176,7 @@ def node_cycle_check(G, node1):
                     continue
                 if node == node1:
                     lst.append(node)
-                    return lst
+                    return True
                 S.append(node)
     return False
 
