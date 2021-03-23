@@ -40,4 +40,3 @@ def prim1(g):
                 
     return MST.adj
 
-    
