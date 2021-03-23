@@ -1,20 +1,43 @@
 from lab8 import *
 
-def prim2(G):
+def prim2(g):
 
+    MST = WeightedGraph(g.number_of_nodes)
+    visited = []
     L = []
 
-    for i in range(G.number_of_nodes):
-        if i != 0:
-            L[i] = 99999
+    for i in range(g.number_of_nodes):
+        if i == 0:
+            L.append(0)
+        else:
+            L.append(99999)
 
-    min_heap = MinHeap(L)
+    min_heap = min_heap(L)
 
-    while G.
+    while len(visited) != g.number_of_nodes:
 
+        min_key = min_heap.extract_min.value
+
+        while min_key in visited:
+
+            min_key = min_heap.extract_min.value
+            
+        visited.append(min_key)
+
+        minNode = 99999
+
+        for node in g.adjacent_nodes[min_key]:
+
+            if node < minNode:
+                minNode = node
+
+            if g.w(min_key, node) < L[node]:
+                min_heap.decrease_key(min_key, g.w(min_key, node))
+
+        MST.add_edge(min_key,minNode,g.)
 
 def prim1(g):
-    
+
     global node2, node1, node_edge_combo
     MST = WeightedGraph(g.number_of_nodes())
 
