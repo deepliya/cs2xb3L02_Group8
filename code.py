@@ -25,6 +25,16 @@ bigboy.add_edge(7, 8, 3)
 bigboy.add_edge(7, 9, 9)
 bigboy.add_edge(8, 9, 9)
 
+g2 = WeightedGraph(5)
+g2.add_edge(0, 1, 6)
+g2.add_edge(0, 2, 11)
+g2.add_edge(0, 3, 2)
+g2.add_edge(1, 4, 3)
+g2.add_edge(1, 2, 1)
+g2.add_edge(2, 4, 3)
+g2.add_edge(2, 3, 8)
+g2.add_edge(3, 4, 10)
+
 # def test1():
 #     n = 100
 #     for c in range (200):
