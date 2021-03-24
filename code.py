@@ -1,36 +1,36 @@
-from graphs import *
-import random 
+import random
+import shortest_paths
+import timeit
 
 #Testing Functions
 
-def cycle_test(n, e):
-    g = Graph(n)
-    for i in range(e):
-        nodes = random.sample(range(0, n), 2)
-        g.add_edge(nodes[0], nodes[1])
-    return has_cycle(g)
 
-def is_connected_test(n, e):
-    g = Graph(n)
-    for i in range(e):
-        nodes = random.sample(range(0, n), 2)
-        g.add_edge(nodes[0], nodes[1])
-    return is_connected(g)
+def runtime_test(function, k):
 
-def test1():
-    n = 100
-    for c in range (200):
-        counter = 0
-        for i in range(50):
-            if cycle_test(n, c):
-                counter += 1
-        print(c, counter)
+    if function == "bellman_ford":
+        for i in range(k):
+            G = create_random_complete_graph(101, 1000)
+            start = timeit.default_timer()
+            function(G,0)
+            end = timeit.default_timer()
+            print(end-start)
+    else:
+        for i in range(1, k + 1):
+            G = create_random_complete_graph(101, 1000)
+            start = timeit.default_timer()
+            function(G, 0, k)
+            end = timeit.default_timer()
+            print(end-start)
 
-def test2():
-    n = 100
-    for c in range (500):
-        counter = 0
-        for i in range(20):
-            if is_connected_test(n, c):
-                counter += 1
-        print(c, counter)
+def total_distance_test(function, k):
+
+    if function == "bellman_ford":
+        for i in range(k):
+            G = create_random_complete_graph(101, 1000)
+            print(yes)
+    else:
+        for i in range(1, k+1):
+            G = create_random_complete_graph(101, 1000)
+            print(total_dist(function(G, 0, k)))
+
+total_distance_test("bellman_ford", 5)

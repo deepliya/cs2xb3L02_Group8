@@ -1,40 +1,58 @@
 from lab8 import *
 
+def prim3(g):
+
+    MST = WeightedGraph(g.number_of_nodes())
+    L = []
+
+    for i in range(g.number_of_nodes()):
+
+        if i != 0:
+            L.append(Element(99999,i))
+
+    heap = MinHeap(L)
+
+    for node in g.adjacent_nodes(0):
+
+        
+
+
+
+
+
+
 def prim2(g):
 
-    MST = WeightedGraph(g.number_of_nodes)
+    MST = WeightedGraph(g.number_of_nodes())
     visited = []
     L = []
 
-    for i in range(g.number_of_nodes):
+    for i in range(g.number_of_nodes()):
         if i == 0:
             L.append(0)
         else:
             L.append(99999)
 
-    min_heap = min_heap(L)
+    heap = MinHeap(L)
 
-    while len(visited) != g.number_of_nodes:
+    while len(visited) != g.number_of_nodes():
 
-        min_key = min_heap.extract_min.value
+        min_key = heap.extract_min.value
 
         while min_key in visited:
 
-            min_key = min_heap.extract_min.value
-            
-        visited.append(min_key)
+            min_key = heap.extract_min.value
 
-        minNode = 99999
+        visited.append(min_key)
 
         for node in g.adjacent_nodes[min_key]:
 
-            if node < minNode:
-                minNode = node
-
             if g.w(min_key, node) < L[node]:
-                min_heap.decrease_key(min_key, g.w(min_key, node))
+                heap.decrease_key(min_key, g.w(min_key, node))
 
-        MST.add_edge(min_key,minNode,g.)
+        MST.add_edge(min_key,heap.get_min.value, g.w(min_key, heap.get_min.value))
+
+    return MST
 
 def prim1(g):
 
@@ -77,3 +95,27 @@ def prim1(g):
                 break
                 
     return MST.adj
+
+bigboy = WeightedGraph(10)
+bigboy.add_edge(0, 1, 4)
+bigboy.add_edge(0, 2, 3)
+bigboy.add_edge(0, 9, 18)
+bigboy.add_edge(0, 4, 10)
+bigboy.add_edge(1, 2, 1)
+bigboy.add_edge(1, 3, 4)
+bigboy.add_edge(2, 4, 9)
+bigboy.add_edge(2, 3, 5)
+bigboy.add_edge(3, 4, 7)
+bigboy.add_edge(3, 5, 9)
+bigboy.add_edge(3, 6, 9)
+bigboy.add_edge(4, 6, 8)
+bigboy.add_edge(4, 7, 9)
+bigboy.add_edge(4, 9, 8)
+bigboy.add_edge(5, 6, 2)
+bigboy.add_edge(5, 7, 4)
+bigboy.add_edge(5, 8, 6)
+bigboy.add_edge(6, 7, 2)
+bigboy.add_edge(7, 8, 3)
+bigboy.add_edge(7, 9, 9)
+bigboy.add_edge(8, 9, 9)
+print(prim2(bigboy))

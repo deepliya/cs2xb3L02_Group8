@@ -188,5 +188,7 @@ class RBTree:
 
 t = RBTree()
 
-for i in range(1, 101):
+for i in range(1, 50):
     t.insert(i)
+
+print(t.get_height())
