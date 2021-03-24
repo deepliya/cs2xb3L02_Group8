@@ -2,40 +2,32 @@ from lab8 import *
 import copy
 
 def prim2(g):
-
-    MST = WeightedGraph(g.number_of_nodes)
-    visited = []
+    global node1
+    MST = WeightedGraph(g.number_of_nodes())
+    visited = [0]
     L = []
 
-    for i in range(g.number_of_nodes):
-        if i == 0:
-            L.append(0)
-        else:
-            L.append(99999)
+    for i in range(g.number_of_nodes()):
+        L.append(Element(i, 99999))
 
-    min_heap = min_heap(L)
+    min_heap = MinHeap(L)
+    i = 0
 
-    while len(visited) != g.number_of_nodes:
+    while len(visited) < len(L):
+        while i < len(visited):
+            for j in g.adjacent_nodes(visited[i]):
+                if j[0] in visited:
+                    continue
+                min_heap.decrease_key(j[0], j[1])
+                if min_heap.get_min().value == j[0]:
+                    node1 = visited[i]
+            i += 1
+        smallest_edge = min_heap.extract_min()
+        MST.add_edge(node1, smallest_edge.value, smallest_edge.key)
+        visited.append(smallest_edge.value)
+        i = 0
 
-        min_key = min_heap.extract_min.value
-
-        while min_key in visited:
-
-            min_key = min_heap.extract_min.value
-            
-        visited.append(min_key)
-
-        minNode = 99999
-
-        for node in g.adjacent_nodes[min_key]:
-
-            if node < minNode:
-                minNode = node
-
-            if g.w(min_key, node) < L[node]:
-                min_heap.decrease_key(min_key, g.w(min_key, node))
-
-        MST.add_edge(min_key,minNode,g.)
+    return MST.adj
 
 def prim1(g):
     global node2, node1, node_edge_combo
