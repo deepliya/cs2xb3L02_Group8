@@ -2,9 +2,6 @@ import random
 import shortest_paths
 import timeit
 
-#Testing Functions
-
-
 def runtime_test(function, k):
 
     if function == "bellman_ford":
