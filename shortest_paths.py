@@ -156,6 +156,7 @@ def init_d(G):
         d[i][i] = 0
     return d
 
+# Test graphs
 short = DirectedWeightedGraph()
 
 short.add_node("A")
