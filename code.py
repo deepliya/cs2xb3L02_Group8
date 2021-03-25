@@ -1,33 +1,23 @@
 import random
-import shortest_paths
+from shortest_paths import *
 import timeit
 
-def runtime_test(function, k):
+def runtime_test_approx(k):
 
-    if function == "bellman_ford":
-        for i in range(k):
-            G = create_random_complete_graph(101, 1000)
-            start = timeit.default_timer()
-            function(G,0)
-            end = timeit.default_timer()
-            print(end-start)
-    else:
-        for i in range(1, k + 1):
-            G = create_random_complete_graph(101, 1000)
-            start = timeit.default_timer()
-            function(G, 0, k)
-            end = timeit.default_timer()
-            print(end-start)
+    for i in range(1, k+1):
 
-def total_distance_test(function, k):
+        G = create_random_complete_graph(100,1001)
+        start = timeit.default_timer()
+        bellman_ford_approx(G, 0, 1)
+        end = timeit.default_timer()
+        print(end-start)
 
-    if function == "bellman_ford":
-        for i in range(k):
-            G = create_random_complete_graph(101, 1000)
-            print(yes)
-    else:
-        for i in range(1, k+1):
-            G = create_random_complete_graph(101, 1000)
-            print(total_dist(function(G, 0, k)))
+def total_dist_test_approx(k):
 
-total_distance_test("bellman_ford", 5)
+    for i in range(1, k+1):
+        G = create_random_complete_graph(100,1001)
+        print(total_dist(bellman_ford_approx(G, 0, i)))
+
+
+
+
