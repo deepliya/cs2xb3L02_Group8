@@ -23,6 +23,16 @@ def total_dist_test(k):
         G = create_random_complete_graph(100, 1000)
         print(str(total_dist(bellman_ford_approx(G, 0, i))) + " " + str(total_dist(bellman_ford(G, 0))))
 
+        
+def time_test_mystery(n, runs):
+    total1 = 0
+    for _ in range(runs):
+        G = create_random_complete_graph(n, 1001)
+        start = timeit.default_timer()
+        mystery(G)
+        total1 += timeit.default_timer() - start
+    runtime1 = total1 / runs
+    return runtime1
 
 runtime_test(100)
 total_dist_test(100)
